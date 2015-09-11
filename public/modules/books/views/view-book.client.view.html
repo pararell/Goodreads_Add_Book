@@ -1,0 +1,100 @@
+<section data-ng-controller="BooksController" data-ng-init="findOne() " >
+   <ul class="flex-container">
+
+ 
+
+  <li class='flex-item2'>
+		<h1>{{book.title}} </h1>
+
+
+  <div class = 'imga' data-ng-show = "((book.image != ''))">
+        <a data-ng-href="{{book.link}}" target="_blank">   <img src = {{book.image}}> </a><p>{{book.author}} <br>{{book.pages}} Pages<br>{{book.year}}</p> 
+        </div>
+        <div class = 'knihy'>
+          
+        <span data-ng-bind="book.description"></span>
+      </div>
+     
+
+	
+
+ <div ng-repeat="comment in comments" ng-show = "book._id == comment.book._id">
+  <div class = 'commenty'>
+    <br>{{comment.body}} 
+  </div>
+     <small>
+    <em class="text-muted">
+      Posted on
+      <span data-ng-bind="comment.created | date:'mediumDate'"></span>
+      by
+      <span data-ng-bind="comment.user.displayName"></span>
+    </em>
+  </small>
+
+     <button class = "btn" ng-click="deletecom(comment._id, comment)" data-ng-show="((authentication.user) && (authentication.user._id == comment.user._id))">Delete</button>
+    
+     <!--<button class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="update(comment.book._id)">Edit</button>-->
+</div>
+<div class = 'commenti' data-ng-show="authentication.user" style='margin-top:20px'>
+ <form ng-submit="comment()">
+ 	<h3>Add a new comment</h3>
+            <textarea type="text"
+                   class="form-control"
+                   placeholder="Comment"
+                   ng-model="body" required></textarea>
+ <br>
+        <button type="submit" class="btn">Comment</button>
+    </form>
+<br>
+	</div>
+</li>
+ <li class='flex-item2' style="float:right">
+ <div class="pull-right" style= 'margin-top:10px;' data-ng-show="((authentication.user) && (authentication.user._id == book.user._id))">
+    <!--<a class="btn btn-primary" href="/#!/books/{{book._id}}/edit">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>-->
+    <a class="btn" data-ng-click="remove();">
+      <i class="glyphicon glyphicon-remove"></i>
+    </a>
+  </div>
+
+  </div>
+    
+    <div style="margin-top:10px; text-align:center; float: right" data-ng-show = "((book.similarimg != ''))"><h4>Similar Books: </h4><p>{{book.similar}}<br><a data-ng-href="{{book.similarlink}}" target="_blank"> <img src = {{book.similarimg}}></a></p><p>{{book.similar2}}<br><a data-ng-href="{{book.similarlink2}}" target="_blank"> <img src = {{book.similarimg2}}></a></p><p>{{book.similar3}}<br><a data-ng-href="{{book.similarlink3}}" target="_blank"> <img src = {{book.similarimg3}}></a></p></div>
+  </li>
+</ul>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-show="displayForm">
+  <div class="modal-dialog">
+    <div class="modal-content">      
+      <div class="modal-body">
+
+<form class="form-horizontal" data-ng-submit="update()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="name">Comment</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="body" id="body" class="form-control" placeholder="Comment" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+
+    <div class="modal-footer">       
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+ 
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</section>

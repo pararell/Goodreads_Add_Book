@@ -1,0 +1,19 @@
+{
+  "name": "north",
+  "version": "0.0.1",
+  "description": "Inspiration",
+  "dependencies": {
+    "angular": "~1.2",
+    "angular-animate": "~1.2",
+    "angular-bootstrap": "~0.12.0",
+    "angular-cookies": "~1.2",
+    "angular-mocks": "~1.2",
+    "angular-resource": "~1.2",
+    "angular-sanitize": "~1.2",
+    "angular-touch": "~1.2",
+    "angular-ui-router": "~0.2.11",
+    "angular-ui-utils": "~0.1.1",
+    "bootstrap": "~3",
+    "todomvc-common": "~1.0.2"
+  }
+}

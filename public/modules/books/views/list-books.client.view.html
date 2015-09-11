@@ -1,0 +1,47 @@
+<section data-ng-controller="BooksController" data-ng-init="find()">
+    <div class="page-header" style = 'margin-top:5px'>
+        <div class="container">
+       <h1 align = 'center'>Books recommendations from Goodreads</h1>
+        <ul class="alphabet">
+            <li ng-repeat="char in alphabet">
+                <span ng-click="filterByAlphabet(char)">{{char}}</span>
+            </li>
+        </ul>
+    </div>
+      
+    </div>
+
+    <div class="form-group">
+        <input type="text" ng-model="search" typeahead="book as book.title for book in books | filter:$viewValue | limitTo:8" class="form-control" typeahead-on-select="bookSearch($item)" placeholder="Search Books...">
+    </div>
+
+    <ul class="flex-container">
+        
+        <li data-ng-repeat="book in books" class="flex-item">
+			<a data-ng-href="#!/{{book._id}}/view">
+                <div class ='wrapper'>
+			<h4 class="list-group-item-heading" data-ng-bind="book.title"></h4>
+                 
+             <div data-ng-show = "((book.image != ''))" class= "immg">
+            <img src = {{book.image}}> 
+            
+        </div>
+        <div class="listy" class="flex-item">
+                Posted on
+                <span data-ng-bind="book.created | date:'medium'"></span>
+                by
+                <span data-ng-bind="book.user.displayName"></span>
+            </div>
+          </div>
+           </a>
+       
+
+   </ul>
+  </div>
+        </div>
+
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!books.$resolved || books.length">
+    	No Books yet, why don't you <a href="/#!/books/create">create one</a>?
+    </div>
+</section>
